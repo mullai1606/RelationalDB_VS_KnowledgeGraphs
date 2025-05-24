@@ -6,6 +6,9 @@ Application Frontend GUI
 
 ![image](https://github.com/user-attachments/assets/67ba94ce-ffcb-462c-aad7-29a70e1beba6)
 
+![image](https://github.com/user-attachments/assets/87584140-01f5-4505-80ab-1e604e5a3a15)
+
+
 Overview 
 we are Going to Compare  R-DB vs Knowledge Graph by Develop an flask application in two ways 1 with SQL(R-DB) as Backend and the other with Neo4J as backend and the Front end is of HTML and CSS.
 The application - Product Management System 
