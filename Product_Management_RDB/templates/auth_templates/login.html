@@ -1,0 +1,53 @@
+<!-- <!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body>
+    <h2>Login</h2>
+    <form method="POST">
+        <label>Email:</label><input type="email" name="email" required><br>
+        <label>Password:</label><input type="password" name="password" required><br>
+        <label>Role:</label>
+        <select name="role">
+            <option value="consumer">Consumer</option>
+            <option value="supplier">Supplier</option>
+            <option value="admin">Admin</option>
+        </select><br>
+        <button type="submit">Login</button>
+    </form>
+    <a href="/auth/register">Register Here</a>
+</body>
+</html> -->
+
+
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Login</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="{{ url_for('auth.login') }}">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" name="email" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Login</button>
+    </form>
+</div>
+{% endblock %}
+
+
+
+
+
+
+

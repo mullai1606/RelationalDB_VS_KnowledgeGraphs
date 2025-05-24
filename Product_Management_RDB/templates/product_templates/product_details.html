@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Product Details</title></head>
+<body>
+    <h2>{{ product.name }} Details</h2>
+    <p>Category: {{ product.category.name }}</p>
+    <p>Description: {{ product.description }}</p>
+    <p>Cost: ${{ product.cost }}</p>
+    <p>Version: {{ product.version }}</p>
+    <a href="/products/{{ product.id }}/add_subproduct">Add SubProduct</a>
+</body>
+</html>
+
+<!-- {% extends 'layout.html' %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block content %}
+<h2>{{ product.name }}</h2>
+<p>Category: {{ product.category.name }}</p>
+<h3>SubProducts:</h3>
+<ul>
+    {% for sp in product.subproducts %}
+    <li>{{ sp.name }} - ${{ sp.price }}</li>
+    {% endfor %}
+</ul>
+{% endblock %} -->

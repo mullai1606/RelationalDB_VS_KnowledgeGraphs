@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        h1 { color: #333; }
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Product Management System</h1>
+    <p>Manage Products, Suppliers, Consumers, and Admin Operations.</p>
+    <a href="{{ url_for('auth.login') }}">Login</a>
+
+</body>
+</html>
+
+<!-- {% extends 'layout.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<h2>Welcome to the Product Management App</h2>
+<p>Please log in or register to continue.</p>
+{% endblock %} -->

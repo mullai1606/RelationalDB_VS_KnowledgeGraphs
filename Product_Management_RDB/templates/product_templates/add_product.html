@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Product</title></head>
+<body>
+    <h2>Add Product</h2>
+    <form method="POST">
+        <label>Name:</label><input type="text" name="name"><br>
+        <label>Category:</label>
+        <select name="category_id">
+            {% for c in categories %}
+                <option value="{{ c.id }}">{{ c.name }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Cost:</label><input type="text" name="cost"><br>
+        <label>Version:</label><input type="text" name="version"><br>
+        <label>Description:</label><textarea name="description"></textarea><br>
+        <label>Brand ID:</label><input type="text" name="brand_id"><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+<!-- {% extends 'layout.html' %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<h2>Add New Product</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name() }}<br>
+    {{ form.category.label }} {{ form.category() }}<br>
+    {{ form.submit() }}
+</form>
+{% endblock %} -->
