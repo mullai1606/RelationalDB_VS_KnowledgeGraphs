@@ -13,7 +13,8 @@ Application Frontend GUI
 
 we are Going to Compare  R-DB vs Knowledge Graph by Develop an flask application in two ways 1 with SQL(R-DB) as Backend and the other with Neo4J as backend and the Front end is of HTML and CSS.
 The application - Product Management System 
-R-DB 
+
+**R-DB** 
 	Entities:
 •	Product (id, name, Category, cost, version, decription)
 •	SubProduct (id, name, version, belongs_to_product,decription)
@@ -26,7 +27,7 @@ R-DB
 •	A Plant manages many Products
 •	Product belongs to a Category
 
-KG
+**KG**
 Nodes (Entities / Classes)
 Node Type	Properties
 Product	id, name, version, cost, description
@@ -58,7 +59,7 @@ for example :
 product-"voice conversion ai"(id"automatically generated", name"voice conversion ai", category"AI", cost"10$", version"1.1", description"converting text into voice using prerained voice models")
 subProduct - "voice to voice conversion"(id"automatically generated",name"voice to voice conversion", version"1.1", belongs_to_product"voice conversion ai",decription"converting voice into another voice using prerained voice models") 
 
-SQL Tables:
+**SQL Tables:**
 1. User Table
 2. Product Table
 Application Modules:
@@ -71,7 +72,7 @@ Application Modules:
 7.	setup
 8.	Frontend
 
-Overview:
+**Module Overview:**
 1.Authentication Module:
 •	Handles:
 -	Login for all users (Consumer, Supplier, Admin)
@@ -148,7 +149,7 @@ Key Files:
 -	static/
 -	css/
 
-MODULE FLOW SUMMARY
+**MODULE FLOW SUMMARY**
 •	Auth Module Flow
 -	Show login screen
 -	Select role (Consumer / Supplier / Create User)
