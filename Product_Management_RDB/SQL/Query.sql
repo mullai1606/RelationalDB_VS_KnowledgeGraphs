@@ -22,7 +22,7 @@ CREATE TABLE supplier (
     name VARCHAR(100) NOT NULL,
     contact VARCHAR(20),
     email VARCHAR(100),
-    plant_id INT,
+    brand_id INT,
     FOREIGN KEY (plant_id) REFERENCES plant_brand(id)
 );
 

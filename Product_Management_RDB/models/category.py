@@ -7,4 +7,4 @@ class Category(db.Model):
     name = db.Column(db.String(100), nullable=False, unique=True)
     description = db.Column(db.Text, nullable=True)
 
-    products = db.relationship('Product', backref='category', lazy=True)
+    #products = db.relationship('Product', backref='category', lazy=True)

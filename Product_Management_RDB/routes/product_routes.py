@@ -12,34 +12,69 @@ product_bp = Blueprint('product', __name__, url_prefix='/products')
 @product_bp.route('/')
 def view_products():
     products = Product.query.all()
-    return render_template('product/view_products.html', products=products)
+    return render_template('product_templates/view_products.html', products=products)
 
 @product_bp.route('/<int:product_id>')
 def product_details(product_id):
     product = Product.query.get_or_404(product_id)
     return render_template('product_templates/product_details.html', product=product)
 
+# @product_bp.route('/add', methods=['GET', 'POST'])
+# @login_required
+# def add_product():
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         category_id = request.form['category_id']
+#         cost = request.form['cost']
+#         version = request.form['version']
+#         description = request.form['description']
+#         brand_id = request.form['brand_id']
+
+#         product = Product(name=name, category_id=category_id, cost=cost,
+#                           version=version, description=description,
+#                           supplier_id=current_user.id, brand_id=brand_id)
+#         db.session.add(product)
+#         db.session.commit()
+#         flash('Product added successfully!', 'success')
+#         return redirect(url_for('product.view_products'))
+    
+#     categories = Category.query.all()
+#     return render_template('product_templates/add_product.html', categories=categories)
+
 @product_bp.route('/add', methods=['GET', 'POST'])
 @login_required
 def add_product():
     if request.method == 'POST':
         name = request.form['name']
-        category_id = request.form['category_id']
+        category = request.form['category']  # Enum value as string
         cost = request.form['cost']
         version = request.form['version']
         description = request.form['description']
-        brand_id = request.form['brand_id']
+        brand_id = request.form['brand_id']  # Selected brand from dropdown
 
-        product = Product(name=name, category_id=category_id, cost=cost,
-                          version=version, description=description,
-                          supplier_id=current_user.id, brand_id=brand_id)
+        product = Product(
+            name=name,
+            category=category,
+            cost=cost,
+            version=version,
+            description=description,
+            supplier_id=current_user.id,
+            plant_brand_id=brand_id
+        )
         db.session.add(product)
         db.session.commit()
         flash('Product added successfully!', 'success')
         return redirect(url_for('product.view_products'))
+
+    # Enum categories (hardcoded list)
+    categories = ['Operating System', 'Music', 'Video_editing', 'Firmware', 'casual', 'Games']
     
-    categories = Category.query.all()
-    return render_template('product_templates/add_product.html', categories=categories)
+    # Fetch registered brands from DB
+    from models.plant_brand import PlantBrand
+    brands = PlantBrand.query.all()
+
+    return render_template('product_templates/add_product.html', categories=categories, brands=brands)
+
 
 @product_bp.route('/<int:product_id>/add_subproduct', methods=['GET', 'POST'])
 @login_required
