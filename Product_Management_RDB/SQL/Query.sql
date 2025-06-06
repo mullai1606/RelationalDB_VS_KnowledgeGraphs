@@ -41,7 +41,9 @@ CREATE TABLE product (
     cost DECIMAL(10,2),
     version VARCHAR(20),
     description TEXT,
-    brand_id INT,
+    plant_brand_id INT, 
+    supplier_id INT,
+    FOREIGN KEY (supplier_id) REFERENCES supplier(id);
     FOREIGN KEY (category_id) REFERENCES category(id),
     FOREIGN KEY (brand_id) REFERENCES plant_brand(id)
 );

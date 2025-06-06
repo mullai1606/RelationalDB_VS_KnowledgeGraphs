@@ -11,4 +11,5 @@ class Product(db.Model):
     description = db.Column(db.Text, nullable=True)
     plant_brand_id = db.Column(db.Integer, db.ForeignKey('plant_brand.id'))
 
+    supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id'), nullable=False)
     subproducts = db.relationship('SubProduct', backref='product', cascade="all, delete-orphan")

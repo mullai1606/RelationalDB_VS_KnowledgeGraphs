@@ -39,7 +39,7 @@ def add_product():
         return redirect(url_for('product.view_products'))
     
     categories = Category.query.all()
-    return render_template('product/add_product.html', categories=categories)
+    return render_template('product_templates/add_product.html', categories=categories)
 
 @product_bp.route('/<int:product_id>/add_subproduct', methods=['GET', 'POST'])
 @login_required
