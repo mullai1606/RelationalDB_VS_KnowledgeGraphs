@@ -10,8 +10,12 @@ supplier_bp = Blueprint('supplier', __name__, url_prefix='/supplier')
 @supplier_bp.route('/dashboard')
 @login_required
 def dashboard():
-    products = Product.query.filter_by(supplier_id=current_user.id).all()
-    return render_template('supplier_templates/dashboard.html', products=products)
+    supplier_products = Product.query.filter_by(supplier_id=current_user.id).all()
+    all_products = Product.query.all()
+
+    return render_template('supplier_templates/dashboard.html',
+                           products=supplier_products,
+                           all_products=all_products)
 
 @supplier_bp.route('/add_brand', methods=['GET', 'POST'])
 @login_required

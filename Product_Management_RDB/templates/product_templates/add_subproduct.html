@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head><title>Add SubProduct</title></head>
+<head>
+    <title>Add SubProduct</title>
+</head>
 <body>
     <h2>Add SubProduct</h2>
     <form method="POST">
-        <label>Name:</label><input type="text" name="name"><br>
-        <label>Version:</label><input type="text" name="version"><br>
-        <label>Description:</label><textarea name="description"></textarea><br>
-        <button type="submit">Add</button>
+        <label for="product_id">Parent Product:</label>
+        <select name="product_id" id="product_id" required>
+            {% for p in products %}
+                <option value="{{ p.id }}">{{ p.name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="name">SubProduct Name:</label>
+        <input type="text" name="name" id="name" required><br><br>
+
+        <label for="version">Version:</label>
+        <input type="text" name="version" id="version"><br><br>
+
+        <label for="description">Description:</label>
+        <textarea name="description" id="description"></textarea><br><br>
+
+        <button type="submit">Add SubProduct</button>
     </form>
 </body>
 </html>
 
-<!-- {% extends 'layout.html' %}
 
-{% block title %}Add SubProduct{% endblock %}
 
-{% block content %}
-<h2>Add SubProduct</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.name.label }} {{ form.name() }}<br>
-    {{ form.product.label }} {{ form.product() }}<br>
-    {{ form.price.label }} {{ form.price() }}<br>
-    {{ form.submit() }}
-</form>
-{% endblock %} -->

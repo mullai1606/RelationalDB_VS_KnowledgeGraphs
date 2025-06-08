@@ -1,14 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head><title>Supplier Dashboard</title></head>
+<head>
+    <title>Supplier Dashboard</title>
+</head>
 <body>
     <h2>Your Products</h2>
-    {% for p in products %}
-        <p>{{ p.name }} - ${{ p.cost }}</p>
-    {% endfor %}
-    <a href="/products/add">Add New Product</a> | 
-    <a href="/supplier/add_brand">Add New Brand</a>
+    {% if products %}
+        {% for p in products %}
+            <p>
+                {{ p.name }} - ${{ p.cost }}
+                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Available Products</h2>
+    {% if all_products %}
+        {% for p in all_products %}
+            <div style="margin-bottom: 10px;">
+                <strong>{{ p.name }}</strong> - ${{ p.cost }}
+                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
+
+                {% if p.subproducts %}
+                    <ul>
+                        {% for sp in p.subproducts %}
+                            <li>
+                                Subproduct: {{ sp.name }} - Version: {{ sp.version }}
+                                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No products found in the system.</p>
+    {% endif %}
+
+    <hr>
+
+    <a href="{{ url_for('product.add_product') }}">Add New Product</a> |
+    <a href="{{ url_for('product.add_subproduct') }}">Add Sub Product</a> |
+    <a href="{{ url_for('supplier.add_brand') }}">Add New Brand</a>
 </body>
 </html>
-
-

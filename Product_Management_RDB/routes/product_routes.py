@@ -14,10 +14,10 @@ def view_products():
     products = Product.query.all()
     return render_template('product_templates/view_products.html', products=products)
 
-@product_bp.route('/<int:product_id>')
-def product_details(product_id):
-    product = Product.query.get_or_404(product_id)
-    return render_template('product_templates/product_details.html', product=product)
+# @product_bp.route('/<int:product_id>')
+# def product_details(product_id):
+#     product = Product.query.get_or_404(product_id)
+#     return render_template('product_templates/product_details.html', product=product)
 
 # @product_bp.route('/add', methods=['GET', 'POST'])
 # @login_required
@@ -76,19 +76,51 @@ def add_product():
     return render_template('product_templates/add_product.html', categories=categories, brands=brands)
 
 
-@product_bp.route('/<int:product_id>/add_subproduct', methods=['GET', 'POST'])
+# @product_bp.route('/<int:product_id>/add_subproduct', methods=['GET', 'POST'])
+# @login_required
+# def add_subproduct(product_id):
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         version = request.form['version']
+#         description = request.form['description']
+
+#         subproduct = SubProduct(name=name, version=version, description=description,
+#                                 product_id=product_id, supplier_id=current_user.id)
+#         db.session.add(subproduct)
+#         db.session.commit()
+#         flash('SubProduct added successfully!', 'success')
+#         return redirect(url_for('product.product_details', product_id=product_id))
+    
+#     return render_template('product_templates/add_subproduct.html', product_id=product_id)
+
+@product_bp.route('/<int:product_id>')
+def product_details(product_id):
+    product = Product.query.get_or_404(product_id)
+    subproducts = product.subproducts  # Access via relationship
+    return render_template('product_templates/product_details.html', product=product, subproducts=subproducts)
+
+
+@product_bp.route('/add_subproduct', methods=['GET', 'POST'])
 @login_required
-def add_subproduct(product_id):
+def add_subproduct():
+    from models.product import Product
     if request.method == 'POST':
         name = request.form['name']
         version = request.form['version']
         description = request.form['description']
+        product_id = request.form['product_id']
 
-        subproduct = SubProduct(name=name, version=version, description=description,
-                                product_id=product_id, supplier_id=current_user.id)
+        subproduct = SubProduct(
+            name=name,
+            version=version,
+            description=description,
+            product_id=product_id,
+            supplier_id=current_user.id
+        )
         db.session.add(subproduct)
         db.session.commit()
         flash('SubProduct added successfully!', 'success')
-        return redirect(url_for('product.product_details', product_id=product_id))
-    
-    return render_template('product_templates/add_subproduct.html', product_id=product_id)
+        return redirect(url_for('supplier.dashboard'))
+
+    products = Product.query.filter_by(supplier_id=current_user.id).all()
+    return render_template('product_templates/add_subproduct.html', products=products)

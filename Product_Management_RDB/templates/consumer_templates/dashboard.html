@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head><title>Consumer Dashboard</title></head>
+<head>
+    <title>Consumer Dashboard</title>
+</head>
 <body>
     <h2>Available Products</h2>
-    {% for p in products %}
-        <p>
-            {{ p.name }} - ${{ p.cost }}
-            <form method="POST" action="/consumer/purchase/{{ p.id }}">
-                <button type="submit">Purchase</button>
-            </form>
-            <form method="POST" action="/consumer/rate/{{ p.id }}">
-                <input type="number" name="rating" min="1" max="5">
-                <button type="submit">Rate</button>
-            </form>
-        </p>
-    {% endfor %}
+
+    {% if products %}
+        {% for p in products %}
+            <div style="margin-bottom: 10px;">
+                <strong>{{ p.name }}</strong> - ${{ p.cost }}
+                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
+
+                {% if p.subproducts %}
+                    <ul>
+                        {% for sp in p.subproducts %}
+                            <li>
+                                Subproduct: {{ sp.name }} - Version: {{ sp.version }}
+                                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No products available for purchase.</p>
+    {% endif %}
+
 </body>
 </html>
-
-
-
