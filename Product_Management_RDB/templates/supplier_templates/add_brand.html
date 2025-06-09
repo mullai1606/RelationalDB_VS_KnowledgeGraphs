@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head><title>Add Brand</title></head>
-<body>
-    <h2>Add Brand/Plant</h2>
-    <form method="POST">
-        <label>Name:</label><input type="text" name="name"><br>
-        <label>Location:</label><input type="text" name="location"><br>
-        <button type="submit">Add</button>
+{% extends "layout.html" %}
+
+{% block title %}Add Brand / Plant{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add New Brand / Plant</h2>
+    <form method="POST" class="form-box">
+        <label for="name">Brand/Plant Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" required>
+
+        <button type="submit" class="btn">Add Brand</button>
     </form>
-</body>
-</html>
-
-
+</div>
+{% endblock %}

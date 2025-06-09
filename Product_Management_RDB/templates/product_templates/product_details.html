@@ -1,86 +1,33 @@
-<!-- <h2>{{ product.name }}</h2>
-<p>Version: {{ product.version }}</p>
-<p>Cost: ₹{{ product.cost }}</p>
-<p>Brand: {{ product.plant_brand.name }}</p>
-<p>Description: {{ product.description }}</p>
+{% extends "layout.html" %}
 
-{% if subproducts %}
-<h3>SubProducts</h3>
-<ul>
-    {% for sub in subproducts %}
-        <li>{{ sub.name }} - Version: {{ sub.version }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
- -->
+{% block title %}Product Details{% endblock %}
 
- <!DOCTYPE html>
-<html>
-<head>
-    <title>{{ product.name }} - Details</title>
-    <style>
-        body { font-family: Arial; margin: 20px; }
-        .container { max-width: 600px; margin: auto; }
-        .section { margin-bottom: 20px; }
-        .label { font-weight: bold; }
-        .subproduct { margin-left: 20px; }
-        .btn { padding: 8px 16px; margin-top: 10px; cursor: pointer; }
-    </style>
-</head>
-<body>
+{% block content %}
     <div class="container">
-        <h2>Product Details</h2>
-        <div class="section">
-            <p><span class="label">Name:</span> {{ product.name }}</p>
-            {% if product.parent_product %}
-                <p><span class="label">Parent Product:</span> {{ product.parent_product.name }}</p>
-            {% endif %}
-            <p><span class="label">Category:</span> {{ product.category }}</p>
-            <p><span class="label">Cost:</span> ${{ product.cost }}</p>
-            <p><span class="label">Version:</span> {{ product.version }}</p>
-            <p><span class="label">Brand:</span> {{ product.plant_brand.name if product.plant_brand else 'N/A' }}</p>
-            <p><span class="label">Description:</span> {{ product.description }}</p>
+        <h2>{{ product.name }}</h2>
+
+        <div class="card">
+            <p><strong>Category:</strong> {{ product.category }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <p><strong>Version:</strong> {{ product.version or "N/A" }}</p>
+            <p><strong>Cost:</strong> ₹{{ product.cost }}</p>
+            <p><strong>Brand:</strong> {{ product.plant_brand.name if product.plant_brand else "N/A" }}</p>
         </div>
 
         {% if subproducts %}
-        <div class="section">
-            <h3>SubProducts:</h3>
-            <ul>
+            <h3>Subproducts</h3>
+            <ul class="styled-list">
                 {% for sub in subproducts %}
-                <li class="subproduct">
-                    <strong>{{ sub.name }}</strong> (Version: {{ sub.version }}) - {{ sub.description }}
-                </li>
+                    <li>
+                        <strong>{{ sub.name }}</strong> (Version: {{ sub.version or "N/A" }})<br>
+                        <em>{{ sub.description }}</em>
+                    </li>
                 {% endfor %}
             </ul>
-        </div>
+        {% else %}
+            <p>No subproducts available for this product.</p>
         {% endif %}
 
-        {% if current_user.is_authenticated and current_user.role == 'consumer' %}
-        <div class="section">
-            <form method="POST" action="{{ url_for('consumer.purchase_product', product_id=product.id) }}">
-                <button class="btn" type="submit">Purchase</button>
-            </form>
-        </div>
-        {% endif %}
+        <a href="{{ url_for('consumer.dashboard') }}" class="btn">Back to Dashboard</a>
     </div>
-
-    <!-- Rating popup -->
-    {% with messages = get_flashed_messages(category_filter=['purchase_success']) %}
-    {% if messages %}
-    <script>
-        let rating = prompt("Thank you for your purchase! Please rate the product (1-5):");
-        if (rating) {
-            fetch("{{ url_for('consumer.submit_rating') }}", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ product_id: {{ product.id }}, rating: rating })
-            }).then(res => {
-                if (res.ok) alert("Rating submitted. Thank you!");
-                else alert("Failed to submit rating.");
-            });
-        }
-    </script>
-    {% endif %}
-    {% endwith %}
-</body>
-</html>
+{% endblock %}

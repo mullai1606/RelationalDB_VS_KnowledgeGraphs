@@ -1,50 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Supplier Dashboard</title>
-</head>
-<body>
-    <h2>Your Products</h2>
+{% extends "layout.html" %}
+
+{% block title %}Supplier Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Supplier Dashboard</h2>
+
+    <h3>Your Products</h3>
     {% if products %}
-        {% for p in products %}
-            <p>
-                {{ p.name }} - ${{ p.cost }}
-                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
-            </p>
-        {% endfor %}
+        <ul class="styled-list">
+            {% for p in products %}
+                <li>
+                    <strong>{{ p.name }}</strong> - ₹{{ p.cost }}
+                    <a href="{{ url_for('product.product_details', product_id=p.id) }}" class="btn-small">Details</a>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-        <p>No products available.</p>
+        <p>No products added yet.</p>
     {% endif %}
 
-    <hr>
-
-    <h2>Available Products</h2>
-    {% if all_products %}
-        {% for p in all_products %}
-            <div style="margin-bottom: 10px;">
-                <strong>{{ p.name }}</strong> - ${{ p.cost }}
-                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
-
-                {% if p.subproducts %}
-                    <ul>
-                        {% for sp in p.subproducts %}
-                            <li>
-                                Subproduct: {{ sp.name }} - Version: {{ sp.version }}
-                                <a href="{{ url_for('product.product_details', product_id=p.id) }}">Details</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        {% endfor %}
+    <h3>Available Products</h3>
+    {% if available_products %}
+        <ul class="styled-list">
+            {% for ap in available_products %}
+                <li>
+                    <strong>{{ ap.name }}</strong> - ₹{{ ap.cost }}
+                    {% if ap.subproducts %}
+                        <ul>
+                            {% for sp in ap.subproducts %}
+                                <li>{{ sp.name }} (v{{ sp.version }})</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <a href="{{ url_for('product.product_details', product_id=ap.id) }}" class="btn-small">Details</a>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-        <p>No products found in the system.</p>
+        <p>No available products.</p>
     {% endif %}
 
-    <hr>
-
-    <a href="{{ url_for('product.add_product') }}">Add New Product</a> |
-    <a href="{{ url_for('product.add_subproduct') }}">Add Sub Product</a> |
-    <a href="{{ url_for('supplier.add_brand') }}">Add New Brand</a>
-</body>
-</html>
+    <div class="button-group">
+        <a href="{{ url_for('product.add_product') }}" class="btn">Add New Product</a>
+        <a href="{{ url_for('product.add_subproduct') }}" class="btn">Add Sub Product</a>
+        <a href="{{ url_for('supplier.add_brand') }}" class="btn">Add New Brand</a>
+    </div>
+</div>
+{% endblock %}

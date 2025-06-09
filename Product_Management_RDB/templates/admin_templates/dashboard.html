@@ -1,28 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head><title>Admin Dashboard</title></head>
-<body>
-    <h2>All Users</h2>
-    {% for u in users %}
-        <p>{{ u.name }} ({{ u.role }}) <a href="/admin/delete_user/{{ u.id }}">Delete</a></p>
-    {% endfor %}
-
-    <h2>All Products</h2>
-    {% for p in products %}
-        <p>{{ p.name }} <a href="/admin/delete_product/{{ p.id }}">Delete</a></p>
-    {% endfor %}
-</body>
-</html>
-
-
-<!-- {% extends 'layout.html' %}
+{% extends "layout.html" %}
 
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
-<h2>Admin Dashboard</h2>
-<ul>
-    <li><a href="{{ url_for('product_bp.view_products') }}">View All Products</a></li>
-    <li><a href="{{ url_for('auth_bp.register') }}">Add User</a></li>
-</ul>
-{% endblock %} -->
+    <h2>Admin Dashboard</h2>
+
+    <p>Manage users, view products and system statistics.</p>
+
+    <a href="{{ url_for('product.view_products') }}" class="btn">View All Products</a>
+    <a href="{{ url_for('auth.register') }}" class="btn">Create New User</a>
+{% endblock %}

@@ -1,31 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add SubProduct</title>
-</head>
-<body>
-    <h2>Add SubProduct</h2>
+{% extends "layout.html" %}
+
+{% block title %}Add Subproduct{% endblock %}
+
+{% block content %}
+    <h2>Add Subproduct</h2>
     <form method="POST">
-        <label for="product_id">Parent Product:</label>
-        <select name="product_id" id="product_id" required>
-            {% for p in products %}
-                <option value="{{ p.id }}">{{ p.name }}</option>
+        <label>Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Version:</label>
+        <input type="text" name="version">
+
+        <label>Description:</label>
+        <textarea name="description" required></textarea>
+
+        <label>Select Parent Product:</label>
+        <select name="product_id" required>
+            {% for product in products %}
+                <option value="{{ product.id }}">{{ product.name }}</option>
             {% endfor %}
-        </select><br><br>
+        </select>
 
-        <label for="name">SubProduct Name:</label>
-        <input type="text" name="name" id="name" required><br><br>
-
-        <label for="version">Version:</label>
-        <input type="text" name="version" id="version"><br><br>
-
-        <label for="description">Description:</label>
-        <textarea name="description" id="description"></textarea><br><br>
-
-        <button type="submit">Add SubProduct</button>
+        <button type="submit" class="btn">Add Subproduct</button>
     </form>
-</body>
-</html>
-
-
-
+{% endblock %}
