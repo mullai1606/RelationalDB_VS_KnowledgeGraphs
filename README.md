@@ -2,11 +2,20 @@
 Comparing Realational DB and Knowledge gRaph using Flask and SQl and Ne04j
 
 Application Frontend GUI
-![image](https://github.com/user-attachments/assets/e7e0d06f-3249-4df9-9208-bb4cf6cc198d)
+Login Page 
+![image](https://github.com/user-attachments/assets/96cb7ff3-9c44-4835-8e11-3ab4d2137e78)
 
-![image](https://github.com/user-attachments/assets/67ba94ce-ffcb-462c-aad7-29a70e1beba6)
+user(Consumer) Dashboard
+![image](https://github.com/user-attachments/assets/5a4d9d4e-821b-482f-a851-7bb6e4f3a79c)
 
-![image](https://github.com/user-attachments/assets/87584140-01f5-4505-80ab-1e604e5a3a15)
+User(Supplier) dashboard
+![image](https://github.com/user-attachments/assets/725bc863-057c-41b2-a1f3-8b1f0e4721a6)
+
+![image](https://github.com/user-attachments/assets/56f4a062-3c18-44ec-b35c-5dcf7c07c3bd)
+
+![image](https://github.com/user-attachments/assets/0244fa64-ad34-4d39-995b-eadcf3df9705)
+
+![image](https://github.com/user-attachments/assets/4f2a6fc3-f2f4-41c8-bffb-225e1930b21f)
 
 
 **Overview** :
