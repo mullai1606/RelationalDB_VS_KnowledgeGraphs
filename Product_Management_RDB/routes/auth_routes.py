@@ -68,7 +68,7 @@ def login():
 def register():
     if request.method == 'POST':
         role = request.form['role']
-        name = request.form['username']
+        name = request.form.get('username')
         email = request.form['email']
         contact = request.form.get('contact', '')
         password = request.form['password']

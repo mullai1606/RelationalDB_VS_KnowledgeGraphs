@@ -3,30 +3,58 @@
 {% block title %}Add Product{% endblock %}
 
 {% block content %}
-    <h2>Add New Product</h2>
-    <form method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" required>
+<h2>Add New Product</h2>
+<form method="POST">
+    <label>Name:</label>
+    <input type="text" name="name" required>
 
-        <label>Category:</label>
-        <input type="text" name="category" required>
+    <label>Category:</label>
+    <select name="category_id" id="category-select" onchange="toggleOtherCategory()" required>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+        <option value="Other">Other</option>
+    </select>
 
-        <label>Description:</label>
-        <textarea name="description" required></textarea>
+    <div id="other-category-div" style="display: none;">
+        <label>Enter New Category:</label>
+        <input type="text" name="custom_category" id="other-category" placeholder="Enter new category">
+    </div>
 
-        <label>Cost:</label>
-        <input type="number" name="cost" step="0.01" required>
+    <label>Description:</label>
+    <textarea name="description" required></textarea>
 
-        <label>Version:</label>
-        <input type="text" name="version">
+    <label>Cost:</label>
+    <input type="number" name="cost" step="0.01" required>
 
-        <label>Brand:</label>
-        <select name="brand_id">
-            {% for brand in brands %}
-                <option value="{{ brand.id }}">{{ brand.name }}</option>
-            {% endfor %}
-        </select>
+    <label>Version:</label>
+    <input type="text" name="version">
 
-        <button type="submit" class="btn">Add Product</button>
-    </form>
+    <label>Brand:</label>
+    <select name="brand_id" required>
+        {% for brand in brands %}
+            <option value="{{ brand.id }}">{{ brand.name }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn">Add Product</button>
+</form>
+
+<a href="{{ url_for('supplier.dashboard') }}" class="btn">Back to Dashboard</a>
+<a href="{{ url_for('auth.logout') }}" class="btn">Logout</a>
+
+<script>
+function toggleOtherCategory() {
+    const select = document.getElementById('category-select');
+    const otherDiv = document.getElementById('other-category-div');
+    const otherInput = document.getElementById('other-category');
+    if (select.value === 'Other') {
+        otherDiv.style.display = 'block';
+        otherInput.required = true;
+    } else {
+        otherDiv.style.display = 'none';
+        otherInput.required = false;
+    }
+}
+</script>
 {% endblock %}
