@@ -10,7 +10,7 @@
         <p><strong>Category:</strong> {{ product.category.name if product.category else "N/A" }}</p>
         <p><strong>Description:</strong> {{ product.description }}</p>
         <p><strong>Version:</strong> {{ product.version or "N/A" }}</p>
-        <p><strong>Cost:</strong> ₹{{ product.cost }}</p>
+        <p><strong>Cost:</strong> €{{ product.cost }}</p>
         <p><strong>Brand:</strong> {{ product.plant_brand.name if product.plant_brand else "N/A" }}</p>
     </div>
 

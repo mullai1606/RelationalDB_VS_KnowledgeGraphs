@@ -15,7 +15,7 @@ def dashboard():
     
     users = User.query.all()
     products = Product.query.all()
-    return render_template('admin/dashboard.html', users=users, products=products)
+    return render_template('admin_templates/dashboard.html', users=users, products=products)
 
 @admin_bp.route('/delete_user/<int:user_id>')
 @login_required
@@ -40,3 +40,25 @@ def delete_product(product_id):
     db.session.commit()
     flash('Product deleted.', 'success')
     return redirect(url_for('admin.dashboard'))
+
+
+@admin_bp.route('/manage_users')
+@login_required
+def manage_users():
+    if current_user.role != 'admin':
+        flash('Unauthorized access', 'danger')
+        return redirect(url_for('auth.login'))
+
+    users = User.query.filter(User.role != 'admin').all()
+    return render_template('admin_templates/manage_users.html', users=users)
+
+
+@admin_bp.route('/view_products')
+@login_required
+def view_all_products():
+    if current_user.role != 'admin':
+        flash('Unauthorized access', 'danger')
+        return redirect(url_for('auth.login'))
+
+    products = Product.query.all()
+    return render_template('admin_templates/view_all_products.html', products=products)

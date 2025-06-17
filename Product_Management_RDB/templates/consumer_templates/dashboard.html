@@ -10,7 +10,7 @@
         <ul>
             {% for product in products %}
                 <li>
-                    <strong>{{ product.name }}</strong> - ₹{{ product.cost }} 
+                    <strong>{{ product.name }}</strong> - €{{ product.cost }} 
                     <a href="{{ url_for('product.product_details', product_id=product.id) }}" class="btn-small">Details</a>
                     <form method="POST" action="{{ url_for('consumer.purchase_product', product_id=product.id) }}" style="display:inline;">
                         <button type="submit" class="btn-small">Purchase</button>
@@ -27,7 +27,7 @@
         <ul>
             {% for p in purchases %}
                 <li>
-                    {{ p.product_name }} - ₹{{ p.product_cost }} (Rated: {{ p.rating if p.rating else "Not Rated" }})
+                    {{ p.product_name }} - €{{ p.product_cost }} (Rated: {{ p.rating if p.rating else "Not Rated" }})
                 </li>
             {% endfor %}
         </ul>

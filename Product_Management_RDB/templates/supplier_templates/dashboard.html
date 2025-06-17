@@ -11,7 +11,7 @@
         <ul class="styled-list">
             {% for p in products %}
                 <li>
-                    <strong>{{ p.name }}</strong> - ₹{{ p.cost }}
+                    <strong>{{ p.name }}</strong> - €{{ p.cost }}
                     <a href="{{ url_for('product.product_details', product_id=p.id) }}" class="btn-small">Details</a>
                 </li>
             {% endfor %}
@@ -25,7 +25,7 @@
         <ul class="styled-list">
             {% for ap in available_products %}
                 <li>
-                    <strong>{{ ap.name }}</strong> - ₹{{ ap.cost }}
+                    <strong>{{ ap.name }}</strong> - €{{ ap.cost }}
                     {% if ap.subproducts %}
                         <ul>
                             {% for sp in ap.subproducts %}
