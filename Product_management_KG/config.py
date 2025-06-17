@@ -1,0 +1,7 @@
+import os
+
+class Config:
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'your-secret-key'
+    NEO4J_URI = "bolt://localhost:7687"
+    NEO4J_USERNAME = "neo4j"
+    NEO4J_PASSWORD = "your_password"

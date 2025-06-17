@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Product Management{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Product Management System</h1>
+</header>
+
+<body>
+    <div class="top-nav">
+        {% if current_user.is_authenticated %}
+            <span>Logged in as {{ current_user.username }}</span>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout">Logout</a>
+            <a href="{{ request.referrer or url_for('auth.login') }}" class="btn-back">← Back</a>
+        {% endif %}
+    </div>
+    <div class="main-content">
+    </div>
+</body>
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    {% block content %}{% endblock %}
+</div>
+
+<footer>
+    &copy;  Product Management App. Comparing Relational database and Knowledge Graph
+</footer>
+
+</body>
+</html>
+
+

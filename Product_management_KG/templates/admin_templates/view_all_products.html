@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}All Products{% endblock %}
+{% block content %}
+<h2>All Products</h2>
+
+{% if products %}
+    <table class="styled-table">
+        <thead>
+            <tr><th>Name</th><th>Category</th><th>Brand</th><th>Cost</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category.name if product.category else "N/A" }}</td>
+                    <td>{{ product.plant_brand.name if product.plant_brand else "N/A" }}</td>
+                    <td>₹{{ product.cost }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.delete_product', product_id=product.id) }}" class="btn-small danger" onclick="return confirm('Delete product?')">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No products found.</p>
+{% endif %}
+{% endblock %}

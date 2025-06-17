@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<h2>Manage Users</h2>
+
+<a href="{{ url_for('auth.register') }}" class="btn">Create New User</a>
+
+{% if users %}
+    <table class="styled-table">
+        <thead>
+            <tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.delete_user', user_id=user.id) }}" class="btn-small danger" onclick="return confirm('Delete user?')">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No users available.</p>
+{% endif %}
+{% endblock %}
