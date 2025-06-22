@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from config import Config
 from extensions import init_neo4j
 from routes.auth_routes import auth_bp
@@ -18,6 +18,11 @@ def create_app():
     app.register_blueprint(consumer_bp)
     app.register_blueprint(supplier_bp)
     app.register_blueprint(product_bp)
+
+    # 👇 Add root route to redirect to login
+    @app.route('/')
+    def index():
+        return redirect(url_for('auth.login'))
 
     return app
 

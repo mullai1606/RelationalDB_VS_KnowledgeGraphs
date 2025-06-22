@@ -1,4 +1,5 @@
 from utils.neo4j_helpers import run_write_query, run_read_query
+from models.neo4j_user import Neo4jUser
 
 def create_user(user_id, name, email, password, role, contact):
     query = """
@@ -21,7 +22,34 @@ def create_user(user_id, name, email, password, role, contact):
         "contact": contact
     })
 
+
 def get_user_by_email(email):
     query = "MATCH (u:User {email: $email}) RETURN u LIMIT 1"
     result = run_read_query(query, {"email": email})
-    return result[0]['u'] if result else None
+    if result:
+        u = result[0]['u']
+        return Neo4jUser(
+            id=u['id'],
+            name=u['name'],
+            email=u['email'],
+            password=u['password'],
+            role=u['role'],
+            contact=u.get('contact', '')
+        )
+    return None
+
+
+def get_user_by_id(user_id):
+    query = "MATCH (u:User {id: $id}) RETURN u LIMIT 1"
+    result = run_read_query(query, {"id": user_id})
+    if result:
+        u = result[0]['u']
+        return Neo4jUser(
+            id=u['id'],
+            name=u['name'],
+            email=u['email'],
+            password=u['password'],
+            role=u['role'],
+            contact=u.get('contact', '')
+        )
+    return None
