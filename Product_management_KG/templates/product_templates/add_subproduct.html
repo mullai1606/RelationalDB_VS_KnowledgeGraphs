@@ -3,24 +3,28 @@
 {% block title %}Add Subproduct{% endblock %}
 
 {% block content %}
-    <h2>Add Subproduct</h2>
-    <form method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" required>
+<h2>Add Subproduct</h2>
+<form method="POST">
 
-        <label>Version:</label>
-        <input type="text" name="version">
+    <label>Select Parent Product:</label>
+    <select name="parent_product_id" required>
+        {% for product in products %}
+            <option value="{{ product['id'] }}">{{ product['name'] }}</option>
+        {% endfor %}
+    </select>
 
-        <label>Description:</label>
-        <textarea name="description" required></textarea>
+    <label>Subproduct Name:</label>
+    <input type="text" name="name" required>
 
-        <label>Select Parent Product:</label>
-        <select name="product_id" required>
-            {% for product in products %}
-                <option value="{{ product.id }}">{{ product.name }}</option>
-            {% endfor %}
-        </select>
+    <label>Version:</label>
+    <input type="text" name="version">
 
-        <button type="submit" class="btn">Add Subproduct</button>
-    </form>
+    <label>Description:</label>
+    <textarea name="description" required></textarea>
+
+    <button type="submit" class="btn">Add Subproduct</button>
+</form>
+
+<a href="{{ url_for('supplier.dashboard') }}" class="btn">Back to Dashboard</a>
+<a href="{{ url_for('auth.logout') }}" class="btn">Logout</a>
 {% endblock %}

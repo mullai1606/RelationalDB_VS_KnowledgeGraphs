@@ -1,21 +1,32 @@
-from utils.neo4j_helpers import run_write_query
+from utils.neo4j_helpers import run_write_query, run_read_query
+import uuid
 
-def create_subproduct(sub_id, name, version, description, parent_id):
+def create_subproduct(name, description, version, parent_product_id):
+    subproduct_id = str(uuid.uuid4())
+
     query = """
     MATCH (parent:Product {id: $parent_id})
     CREATE (sub:SubProduct {
-        id: $sub_id,
+        id: $id,
         name: $name,
-        version: $version,
-        description: $description
+        description: $description,
+        version: $version
     })
-    CREATE (sub)-[:CHILD_OF]->(parent)
+    MERGE (sub)-[:SUB_OF]->(parent)
     RETURN sub
     """
     return run_write_query(query, {
-        "sub_id": sub_id,
+        "id": subproduct_id,
         "name": name,
-        "version": version,
         "description": description,
-        "parent_id": parent_id
+        "version": version,
+        "parent_id": parent_product_id
     })
+
+def get_subproducts_of_product(product_id):
+    query = """
+    MATCH (parent:Product {id: $product_id})<-[:SUB_OF]-(sub:SubProduct)
+    RETURN sub
+    ORDER BY sub.name
+    """
+    return run_read_query(query, {"product_id": product_id})

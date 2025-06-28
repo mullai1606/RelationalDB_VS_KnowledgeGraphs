@@ -8,8 +8,8 @@
         <ul>
             {% for product in products %}
                 <li>
-                    <strong>{{ product.name }}</strong> - €{{ product.cost }}
-                    <a href="{{ url_for('product.product_details', product_id=product.id) }}" class="btn-small">Details</a>
+                    <strong>{{ product['name'] }}</strong> - ₹{{ product['cost'] }}
+                    <a href="{{ url_for('product.product_details', product_id=product['id']) }}" class="btn-small">Details</a>
                 </li>
             {% endfor %}
         </ul>

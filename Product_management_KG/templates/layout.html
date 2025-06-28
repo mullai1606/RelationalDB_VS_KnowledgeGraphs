@@ -12,6 +12,16 @@
 </header>
 
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="flash-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
     <div class="top-nav">
         {% if current_user.is_authenticated %}
             <span>Logged in as {{ current_user.username }}</span>

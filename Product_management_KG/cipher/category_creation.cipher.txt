@@ -1,0 +1,14 @@
+WITH [
+  'Operating System',
+  'Music',
+  'Video_editing',
+  'Firmware',
+  'casual',
+  'Games',
+  'Development',
+  'plugin'
+] AS categoryNames
+UNWIND categoryNames AS categoryName
+MERGE (c:Category {name: categoryName})
+ON CREATE SET c.id = toString(rand())
+RETURN c;

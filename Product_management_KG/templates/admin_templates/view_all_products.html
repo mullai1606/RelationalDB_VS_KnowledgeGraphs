@@ -1,28 +1,40 @@
 {% extends "layout.html" %}
-{% block title %}All Products{% endblock %}
-{% block content %}
-<h2>All Products</h2>
 
-{% if products %}
-    <table class="styled-table">
-        <thead>
-            <tr><th>Name</th><th>Category</th><th>Brand</th><th>Cost</th><th>Actions</th></tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
+{% block title %}Manage Products{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Manage Products</h2>
+    <div class="card">
+        <table class="user-table">
+            <thead>
                 <tr>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.category.name if product.category else "N/A" }}</td>
-                    <td>{{ product.plant_brand.name if product.plant_brand else "N/A" }}</td>
-                    <td>₹{{ product.cost }}</td>
-                    <td>
-                        <a href="{{ url_for('admin.delete_product', product_id=product.id) }}" class="btn-small danger" onclick="return confirm('Delete product?')">Delete</a>
-                    </td>
+                    <th>Name</th>
+                    <th>Version</th>
+                    <th>Cost</th>
+                    <!-- <th>Brand</th>
+                    <th>Category</th> -->
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>No products found.</p>
-{% endif %}
+            </thead>
+            <tbody>
+                {% for record in products %}
+                    {% set product = record.p %}
+                    <tr>
+                        <td>{{ product['name'] }}</td>
+                        <td>{{ product['version'] or 'N/A' }}</td>
+                        <td>₹{{ product['cost'] }}</td>
+                        <!-- <td>{{ product['brand'] or 'N/A' }}</td>
+                        <td>{{ product['category'] or 'N/A' }}</td> -->
+                        <td>
+                            <a href="{{ url_for('admin.delete_product', product_id=product['id']) }}" class="btn-small danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+</div>
 {% endblock %}
