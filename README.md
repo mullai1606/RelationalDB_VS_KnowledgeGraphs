@@ -3,19 +3,31 @@ Comparing Realational DB and Knowledge gRaph using Flask and SQl and Ne04j
 
 Application Frontend GUI
 Login Page 
+![image](https://github.com/user-attachments/assets/394ef098-ea69-4474-8c30-3e457bf2259d)
+
 ![image](https://github.com/user-attachments/assets/96cb7ff3-9c44-4835-8e11-3ab4d2137e78)
 
 user(Consumer) Dashboard
-![image](https://github.com/user-attachments/assets/5a4d9d4e-821b-482f-a851-7bb6e4f3a79c)
+![image](https://github.com/user-attachments/assets/7b151d1d-e1e7-4a26-9b14-bf22341c1591)
+
+![image](https://github.com/user-attachments/assets/cefcfcd7-c915-499f-a589-456a158f4338)
+
+![image](https://github.com/user-attachments/assets/1868b11a-642f-46a5-84e7-054a40e931e1)
+
 
 User(Supplier) dashboard
-![image](https://github.com/user-attachments/assets/725bc863-057c-41b2-a1f3-8b1f0e4721a6)
+![image](https://github.com/user-attachments/assets/8402385d-3c77-42d5-871d-3bfdfad4363c)
 
-![image](https://github.com/user-attachments/assets/56f4a062-3c18-44ec-b35c-5dcf7c07c3bd)
-
-![image](https://github.com/user-attachments/assets/0244fa64-ad34-4d39-995b-eadcf3df9705)
+![image](https://github.com/user-attachments/assets/5bad0c16-304f-4c80-a39c-10d1d232936d)
 
 ![image](https://github.com/user-attachments/assets/4f2a6fc3-f2f4-41c8-bffb-225e1930b21f)
+
+User(admin) Dashboard 
+![image](https://github.com/user-attachments/assets/faf2fc90-6de5-4179-8691-d4e4e322205d)
+
+![image](https://github.com/user-attachments/assets/459e5e8d-94c4-41f5-87fb-3907274e0d0f)
+
+![image](https://github.com/user-attachments/assets/40b2fc6e-25f1-4960-832e-251bf17b8ad1)
 
 
 **Overview** :
