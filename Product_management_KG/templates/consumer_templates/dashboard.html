@@ -11,7 +11,7 @@
             {% for record in all_products %}
                 {% set product = record.p %}
                 <li>
-                    <strong>{{ product['name'] }}</strong> - ₹{{ product['cost'] }}
+                    <strong>{{ product['name'] }}</strong> - €{{ product['cost'] }}
                     <a href="{{ url_for('product.product_details', product_id=product['id']) }}" class="btn-small">Details</a>
                     <form method="POST" action="{{ url_for('product.purchase_product', product_id=product['id']) }}" style="display:inline;">
     <button type="submit" class="btn-small">Purchase</button>
@@ -31,7 +31,7 @@
                 {% set product = item.p %}
                 {% set brand = item.b %}
                 <li>
-                    <strong>{{ product['name'] }}</strong> - ₹{{ product['cost'] }}<br>
+                    <strong>{{ product['name'] }}</strong> - €{{ product['cost'] }}<br>
                     Brand: {{ brand['name'] if brand else 'N/A' }}<br>
                     {% if item.rating %}
                         <em>Your Rating: {{ item.rating }}</em>
