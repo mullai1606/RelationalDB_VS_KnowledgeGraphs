@@ -6,7 +6,7 @@
 <h2>Register</h2>
 <form method="POST">
     <label for="name">Full Name:</label>
-    <input type="text" name="name" required>
+    <input type="text" name="username" required>
 
     <label for="email">Email:</label>
     <input type="email" name="email" required>
@@ -17,17 +17,24 @@
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" name="confirm_password" required>
 
-    <label for="role">Role:</label>
-    <select name="role" required>
+    <label for="roles">Select Roles:</label>
+    <select name="roles" multiple size="4" required>
         <option value="admin">Admin</option>
         <option value="supplier">Supplier</option>
         <option value="consumer">Consumer</option>
+        <option value="tester">Tester</option>
+        <option value="developer">Developer</option>
+        <option value="reviewer">Reviewer</option>
+        <option value="manager">Manager</option>
+        <option value="viewer">Viewer</option>
+        <option value="analyst">Analyst</option>
+        <option value="architect">Architect</option>
     </select>
+    <small>Hold Ctrl (Windows) or Command (Mac) to select multiple roles.</small>
 
-    <label for="contact">Contact:</label>
-    <input type="text" name="contact">
-
-    <button type="submit">Register</button>
+    <br><br>
+    <button type="submit" class="btn">Register</button>
 </form>
+
 <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a>.</p>
 {% endblock %}

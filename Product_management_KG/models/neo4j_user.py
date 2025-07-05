@@ -3,12 +3,21 @@ from extensions import neo4j_driver
 from utils.neo4j_helpers import run_read_query
 
 class Neo4jUser(UserMixin):
-    def __init__(self, id, name, email, role):
+    def __init__(self, id, name, email, roles):
         self.id = id
         self.name = name
         self.email = email
-        self.role = role
+        self.roles = roles
+    
+    @property
+    def is_authenticated(self):
+        return True
 
+    @property
+    def role(self):
+        # fallback to first role
+        return self.roles[0] if self.roles else None
+            
     def get_id(self):
         return self.id
     
@@ -60,9 +69,23 @@ class Neo4jUser(UserMixin):
     
 
 def load_user(user_id):
-    query = "MATCH (u:User {id: $id}) RETURN u LIMIT 1"
+    query = """
+    MATCH (u:User {id: $id})
+    OPTIONAL MATCH (u)-[:HAS_ROLE]->(r:Role)
+    RETURN u, collect(r) AS roles
+    """
     result = run_read_query(query, {"id": user_id})
+
     if result:
-        u = result[0]['u']
-        return Neo4jUser(id=u['id'], name=u['name'], email=u['email'], role=u['role'])
+        record = result[0]
+        u = record["u"]
+        roles = [{"name": r["name"]} for r in record["roles"]]
+
+        return Neo4jUser(
+            id=u["id"],
+            name=u.get("name", ""),
+            email=u.get("email", ""),
+            roles=roles
+        )
+
     return None

@@ -7,9 +7,9 @@ consumer_bp = Blueprint('consumer', __name__, url_prefix='/consumer')
 @consumer_bp.route('/dashboard')
 @login_required
 def dashboard():
-    if current_user.role != 'consumer':
-        flash("Unauthorized access", "danger")
-        return redirect(url_for('auth.login'))
+    # if current_user.role != 'consumer':
+    #     flash("Unauthorized access", "danger")
+    #     return redirect(url_for('auth.login'))
 
     with neo4j_driver.session() as session:
         # All products

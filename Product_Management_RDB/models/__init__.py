@@ -5,3 +5,4 @@ from models.category import Category
 from models.supplier import Supplier
 from models.plant_brand import PlantBrand
 from models.subproduct import SubProduct
+from models.role import Role

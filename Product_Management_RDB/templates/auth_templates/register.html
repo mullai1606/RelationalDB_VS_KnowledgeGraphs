@@ -17,15 +17,34 @@
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" name="confirm_password" required>
 
-    <label for="role">Role:</label>
-    <select name="role" required>
-        <option value="">--Select--</option>
+    <label for="roles">Select Role(s):</label>
+    <select name="roles" multiple size="4" required>
         <option value="admin">Admin</option>
         <option value="supplier">Supplier</option>
         <option value="consumer">Consumer</option>
+        <option value="moderator">Moderator</option>
+        <option value="reviewer">Reviewer</option>
+        <option value="tester">Tester</option>
+        <option value="analyst">Analyst</option>
+        <option value="developer">Developer</option>
+        <option value="manager">Manager</option>
+        <option value="support">Support</option>
+        <option value="editor">Editor</option>
+        <option value="viewer">Viewer</option>
+        <option value="contributor">Contributor</option>
+        <option value="partner">Partner</option>
+        <option value="auditor">Auditor</option>
+        <option value="intern">Intern</option>
+        <option value="team_lead">Team Lead</option>
+        <option value="architect">Architect</option>
+        <option value="strategist">Strategist</option>
+        <option value="data_engineer">Data Engineer</option>
     </select>
+    <small>You can select multiple roles using Ctrl (or ⌘) + Click</small>
 
+    <br><br>
     <button type="submit" class="btn">Register</button>
 </form>
+
 <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a>.</p>
 {% endblock %}
