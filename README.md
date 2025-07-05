@@ -9,6 +9,10 @@ Login Page
 
 ![image](https://github.com/user-attachments/assets/96cb7ff3-9c44-4835-8e11-3ab4d2137e78)
 
+*Additionally in this branch 
+multiple role login support
+![image](https://github.com/user-attachments/assets/04f73786-42fa-412f-a5ac-2c01178814cb)
+
 user(Consumer) Dashboard
 ![image](https://github.com/user-attachments/assets/7b151d1d-e1e7-4a26-9b14-bf22341c1591)
 
@@ -31,9 +35,7 @@ User(admin) Dashboard
 
 ![image](https://github.com/user-attachments/assets/40b2fc6e-25f1-4960-832e-251bf17b8ad1)
 
-Additionally in this branch 
-multiple role login support
-![image](https://github.com/user-attachments/assets/04f73786-42fa-412f-a5ac-2c01178814cb)
+
 
 
 **Overview** :
