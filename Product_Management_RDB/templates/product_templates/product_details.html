@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ product.name }}</h2>
+
+    <div class="card">
+        <p><strong>Category:</strong> {{ product.category.name if product.category else "N/A" }}</p>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+        <p><strong>Version:</strong> {{ product.version or "N/A" }}</p>
+        <p><strong>Cost:</strong> €{{ product.cost }}</p>
+        <p><strong>Brand:</strong> {{ product.plant_brand.name if product.plant_brand else "N/A" }}</p>
+    </div>
+
+    {% if subproducts %}
+        <h3>Subproducts</h3>
+        <ul class="styled-list">
+            {% for sub in subproducts %}
+                <li>
+                    <strong>{{ sub.name }}</strong> (Version: {{ sub.version or "N/A" }})<br>
+                    <em>{{ sub.description }}</em>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No subproducts available for this product.</p>
+    {% endif %}
+
+    <a href="{{ url_for('consumer.dashboard') }}" class="btn">Back to Dashboard</a>
+    <a href="{{ url_for('auth.logout') }}" class="btn">Logout</a>
+</div>
+{% endblock %}

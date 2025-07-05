@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Consumer Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome, {{ current_user.name }}</h2>
+
+    <h3>Available Products</h3>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <strong>{{ product.name }}</strong> - €{{ product.cost }} 
+                    <a href="{{ url_for('product.product_details', product_id=product.id) }}" class="btn-small">Details</a>
+                    <form method="POST" action="{{ url_for('consumer.purchase_product', product_id=product.id) }}" style="display:inline;">
+                        <button type="submit" class="btn-small">Purchase</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products available at the moment.</p>
+    {% endif %}
+
+    <h3>My Purchases</h3>
+    {% if purchases %}
+        <ul>
+            {% for p in purchases %}
+                <li>
+                    {{ p.product_name }} - €{{ p.product_cost }} (Rated: {{ p.rating if p.rating else "Not Rated" }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't purchased any products yet.</p>
+    {% endif %}
+{% endblock %}

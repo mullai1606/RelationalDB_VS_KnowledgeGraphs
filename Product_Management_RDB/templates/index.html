@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Product Management System</h2>
+    <p>Please <a href="{{ url_for('auth.login') }}" class="btn">Login</a> or <a href="{{ url_for('auth.register') }}" class="btn">Register</a> to continue.</p>
+{% endblock %}

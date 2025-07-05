@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}All Products{% endblock %}
+
+{% block content %}
+    <h2>All Products</h2>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <strong>{{ product.name }}</strong> - €{{ product.cost }}
+                    <a href="{{ url_for('product.product_details', product_id=product.id) }}" class="btn-small">Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products found.</p>
+    {% endif %}
+{% endblock %}
