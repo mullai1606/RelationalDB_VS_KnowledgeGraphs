@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}Supplier Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="title">Supplier Dashboard</h2>
+
+    <!-- Your Products Section -->
+    <h3 class="subtitle">Your Products</h3>
+    {% if products %}
+        <div class="grid">
+            {% for p in products %}
+                <div class="card">
+                    <h4>{{ p.name }}</h4>
+                    <p><strong>Cost:</strong> €{{ p.cost }}</p>
+                    <a href="{{ url_for('product.product_details', product_id=p.id) }}" class="btn-small">Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="notice">No products added yet.</p>
+    {% endif %}
+
+    <!-- Available Products Section -->
+    <h3 class="subtitle">Available Products</h3>
+    {% if available_products %}
+        <div class="grid">
+            {% for ap in available_products %}
+                <div class="card">
+                    <h4>{{ ap.name }}</h4>
+                    <p><strong>Cost:</strong> €{{ ap.cost }}</p>
+
+                    {% if ap.subproducts %}
+                        <p><strong>Subproducts:</strong></p>
+                        <ul>
+                            {% for sp in ap.subproducts %}
+                                <li>{{ sp.name }} (v{{ sp.version }})</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <a href="{{ url_for('product.product_details', product_id=ap.id) }}" class="btn-small">Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="notice">No available products.</p>
+    {% endif %}
+
+    <!-- Action Buttons -->
+    <div class="button-group">
+        <a href="{{ url_for('product.add_product') }}" class="btn">Add New Product</a>
+        <a href="{{ url_for('product.add_subproduct') }}" class="btn">Add Sub Product</a>
+        <a href="{{ url_for('supplier.add_brand') }}" class="btn">Add New Brand</a>
+    </div>
+</div>
+{% endblock %}

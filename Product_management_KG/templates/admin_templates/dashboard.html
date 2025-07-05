@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<p>Manage users, view products and system statistics.</p>
+
+<a href="{{ url_for('admin.manage_users') }}" class="btn">Manage Users</a>
+<a href="{{ url_for('admin.view_all_products') }}" class="btn">View All Products</a>
+{% endblock %}

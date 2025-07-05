@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}Consumer Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome, {{ current_user.name }}</h2>
+
+    <h3>Available Products</h3>
+    {% if all_products %}
+        <ul class="styled-list">
+            {% for record in all_products %}
+                {% set product = record.p %}
+                <li>
+                    <strong>{{ product['name'] }}</strong> - €{{ product['cost'] }}
+                    <a href="{{ url_for('product.product_details', product_id=product['id']) }}" class="btn-small">Details</a>
+                    <form method="POST" action="{{ url_for('product.purchase_product', product_id=product['id']) }}" style="display:inline;">
+    <button type="submit" class="btn-small">Purchase</button>
+</form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+
+    <hr>
+    <h3>Your Purchases</h3>
+    {% if purchased %}
+        <ul class="styled-list">
+            {% for item in purchased %}
+                {% set product = item.p %}
+                {% set brand = item.b %}
+                <li>
+                    <strong>{{ product['name'] }}</strong> - €{{ product['cost'] }}<br>
+                    Brand: {{ brand['name'] if brand else 'N/A' }}<br>
+                    {% if item.rating %}
+                        <em>Your Rating: {{ item.rating }}</em>
+                        {% if item.comment %}<br>Comment: {{ item.comment }}{% endif %}
+                    {% else %}
+                        <form method="POST" action="{{ url_for('product.rate_product', product_id=product['id']) }}">
+                            <label>Rate this product:</label>
+                            <select name="rating" required>
+                                <option value="">--Select--</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <input type="text" name="comment" placeholder="Optional comment">
+                            <button type="submit">Submit Rating</button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have not purchased any products yet.</p>
+    {% endif %}
+{% endblock %}

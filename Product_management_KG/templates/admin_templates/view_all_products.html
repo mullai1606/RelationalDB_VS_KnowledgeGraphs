@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Manage Products{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Manage Products</h2>
+    <div class="card">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Version</th>
+                    <th>Cost</th>
+                    <!-- <th>Brand</th>
+                    <th>Category</th> -->
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in products %}
+                    {% set product = record.p %}
+                    <tr>
+                        <td>{{ product['name'] }}</td>
+                        <td>{{ product['version'] or 'N/A' }}</td>
+                        <td>€{{ product['cost'] }}</td>
+                        <!-- <td>{{ product['brand'] or 'N/A' }}</td>
+                        <td>{{ product['category'] or 'N/A' }}</td> -->
+                        <td>
+                            <a href="{{ url_for('admin.delete_product', product_id=product['id']) }}" class="btn-small danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}
