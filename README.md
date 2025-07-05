@@ -1,5 +1,7 @@
 # RelationalDB_VS_KnowledgeGraphs
-Comparing Realational DB and Knowledge gRaph using Flask and SQl and Ne04j
+
+Comparing Realational DB and Knowledge Graph using Flask with SQl and Ne04j
+
 
 Application Frontend GUI
 Login Page 
